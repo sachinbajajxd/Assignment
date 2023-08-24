@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv=require('dotenv');
 const app = express();
+app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(express.json());
 // const routes=require('./routes/index');
 dotenv.config();
 
@@ -33,6 +35,7 @@ app.use('/',require('./routes'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+
 
 // Start the server
 const port = process.env.PORT;

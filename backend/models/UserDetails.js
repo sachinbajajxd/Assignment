@@ -16,7 +16,7 @@ const formSchema = new mongoose.Schema({
         required: true,
       },
       hobbies: {
-        type: [String],
+        type: String,
         required: true,
       }
 });

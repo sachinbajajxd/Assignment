@@ -18,11 +18,13 @@ module.exports.getUsers = async (req, res) => {
 
 module.exports.submitForm = async (req, res) => {
 
-    console.log(req.body);
-
     try{
 
+        // console.log(req.body);
+
         const { name, email, phone, hobbies } = req.body;
+
+        // console.log(hobbies);
 
         const details = new UserDetails({
         name,
@@ -30,6 +32,8 @@ module.exports.submitForm = async (req, res) => {
         phone,
         hobbies,
         });
+
+        console.log(details);
 
         const info = await details.save();
 
