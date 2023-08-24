@@ -43,8 +43,6 @@ const Edit = (props) => {
         console.error('Error sending data:', error);
       });
       navigate("/");
-    //   props.setIsPopupOpen(false);
-    //   props.setVis('block');
   };
 
   return (
@@ -112,7 +110,6 @@ const Edit = (props) => {
           >
             Save
           </button>
-          {/* <Link to='/'></Link> */}
         </div>
       </form>
     </div>

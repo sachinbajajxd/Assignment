@@ -42,7 +42,6 @@ const TableComponent = () => {
       .then((response) => {
         console.log('Item deleted:', response.data);
         setIsdeleted(true);
-        // Perform any other actions, like updating the UI or fetching data again
       })
       .catch((error) => {
         console.error('Error deleting item:', error);
@@ -63,22 +62,11 @@ const TableComponent = () => {
     }
   };
 
-  const openPopup = () => {
-    console.log("button clicked");
-    setVis(!vis);
-    // <Form />
-    setIsPopupOpen(!isPopupOpen);
-    
-    
-  };
-
   const dynamicStyles = {
     display: vis ? 'block' : 'none'
   };
 
-  // const closePopup = () => {
-  //   setIsPopupOpen(false);
-  // };
+ 
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -124,7 +112,7 @@ const TableComponent = () => {
             </tbody>
           </table>
 
-          <div className="flex justify-center mt-4 space-x-4" style={dynamicStyles}>
+          <div className="flex justify-center mt-4 space-x-4"style={dynamicStyles}>
             <button className="btn bg-slate-500 p-2" onClick={sendEmail}>
               Send
             </button>
