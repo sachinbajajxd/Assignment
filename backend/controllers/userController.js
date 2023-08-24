@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const UserDetails = require('../models/UserDetails');
+const nodemailer=require('nodemailer');
 
 module.exports.Home = (req, res) => {
-    console.log("Checking");
     res.status(200).send('Home');
 };
 
@@ -20,11 +20,8 @@ module.exports.submitForm = async (req, res) => {
 
     try{
 
-        // console.log(req.body);
-
         const { name, email, phone, hobbies } = req.body;
 
-        // console.log(hobbies);
 
         const details = new UserDetails({
         name,
@@ -56,9 +53,6 @@ module.exports.updateUser = async (req, res) => {
 
     const { id } = req.params;
     const { name, phone, email, hobbies } = req.body;
-  
-    // if (mongoose.Types.ObjectId.isValid(id)==false)
-    //   return res.status(404).send("No user with this id");
 
     try{
 
@@ -91,4 +85,38 @@ module.exports.deleteUser = async (req, res) => {
     }
 }
 
-// module.exports = pageNotFound;
+
+module.exports.sendMails = async (req, res) => {
+    const { selectedRows } = req.body;
+
+
+    console.log(selectedRows);
+
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
+            user: 'cierra79@ethereal.email',
+            pass: '9eC475HuywDDnmY3xq'
+        }
+    });
+
+    async function main() {
+        // send mail with defined transport object
+        const info = await transporter.sendMail({
+          from: '"Fred Foo 👻" sachinbajajsmtp@gmail.com', // sender address
+          to: "info@redpositive.in", // list of receivers
+          subject: "Selected User data", // Subject line
+          text: "Hello world", // plain text body
+          html: "<b>Hello world?</b>", // html body
+        });
+      
+        console.log("Message sent: %s", info.messageId);
+      }
+      
+      main().catch(console.error);
+      
+
+      
+   res.json({ message: 'Emails sent successfully' });
+}
