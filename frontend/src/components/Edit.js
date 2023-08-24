@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-// import {Link, Router, Routes, Route} from 'react-router-dom';
+import {Link, Router, Routes, Route, useLocation} from 'react-router-dom';
 
 
-const Form = (props) => {
+const Edit = (props) => {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const propsData = location.state;
+    console.log(propsData);
+
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    hobbies: '',
+    name: propsData.name,
+    email: propsData.email,
+    phone: propsData.phone,
+    hobbies: propsData.hobbies,
   });
 
   // const navigate = useNavigate();
@@ -27,16 +33,18 @@ const Form = (props) => {
     e.preventDefault();
     console.log(formData);
 
-    axios.post('http://localhost:3000/submit-form', formData)
+    const id=propsData._id
+
+    axios.put(`http://localhost:3000/users/${id}`, formData)
       .then(response => {
         console.log('Data sent successfully:', response.data);
       })
       .catch(error => {
         console.error('Error sending data:', error);
       });
-
-      props.setIsPopupOpen(false);
-      props.setVis('block');
+      navigate("/");
+    //   props.setIsPopupOpen(false);
+    //   props.setVis('block');
   };
 
   return (
@@ -112,4 +120,4 @@ const Form = (props) => {
   );
 };
 
-export default Form;
+export default Edit;

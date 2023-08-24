@@ -1,15 +1,23 @@
 import './App.css';
 import Form from  './components/Form';
+import Edit from './components/Edit';
 import TableComponent from './components/Table';
+import {Link, BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      {/* <h1>Hello world</h1> */}
-      <TableComponent />
-      {/* <Form /> */}
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TableComponent />} />
+          <Route path="/edit" element={<Edit />} />
+        </Routes>
+      </BrowserRouter>
+      
+      {/* <TableComponent /> */}
     </div>
-  );
+  )
 }
 
 export default App;
